@@ -24,45 +24,51 @@ var detectNetwork = function(cardNumber) {
     if (cardNumber.length === 14) {
       cardType = 'Diner\'s Club';
     }
+  }
   // American Express prefix of 34 or 37 and a length of 15.
-  } else if (prefixLength2 === '34' || prefixLength2 === '37') {
-      if (cardNumber.length === 15) {
-        cardType = 'American Express';
-      }
+  else if (prefixLength2 === '34' || prefixLength2 === '37') {
+    if (cardNumber.length === 15) {
+      cardType = 'American Express';
+    }
+  }
   // MasterCard prefix of 51-55 and a length of 16.
-  } else if (prefixLength2 === '51' || prefixLength2 === '52' || prefixLength2 === '53' || prefixLength2 === '54' || prefixLength2 === '55') {
-      if (cardNumber.length === 16) {
-        cardType = 'MasterCard';
-      }
+  else if (prefixLength2 === '51' || prefixLength2 === '52' || prefixLength2 === '53' || prefixLength2 === '54' || prefixLength2 === '55') {
+    if (cardNumber.length === 16) {
+      cardType = 'MasterCard';
+    }
+  }
+  // Switch always has a prefix of 4903, 4905, 4911, 4936, 564182, 633110, 6333, or 6759 and a length of 16, 18, or 19.
+  // Heads up! Switch and Visa seem to have some overlapping card numbers - in any apparent conflict, you should choose the network with the longer prefix.
+  else if (prefixLength4 === '4903' || prefixLength4 === '4905' || prefixLength4 === '4911' || prefixLength4 === '4936' || prefixLength6 === '564182' || prefixLength6 === '633110' || prefixLength4 === '6333' || prefixLength4 === '6759') {
+    if (cardNumber.length === 16 || cardNumber.length === 18 || cardNumber.length === 19) {
+      cardType = 'Switch';
+    }
+  }
   // Visa prefix of 4 and a length of 13, 16, or 19
-  } else if (prefixLength1 === '4') {
-      if (cardNumber.length === 13 || cardNumber.length === 16 || cardNumber.length === 19) {
-        cardType = 'Visa';
-      }
+  else if (prefixLength1 === '4') {
+    if (cardNumber.length === 13 || cardNumber.length === 16 || cardNumber.length === 19) {
+      cardType = 'Visa';
+    }
+  }
   // Discover prefix of 6011, 644-649, or 65, and a length of 16 or 19.
-  } else if (prefixLength4 === '6011' || prefixLength3 === '644' || prefixLength3 === '645' || prefixLength3 === '646' || prefixLength3 === '647' || prefixLength3 === '648' || prefixLength3 === '649' || prefixLength2 === '65') {
-      if (cardNumber.length === 16 || cardNumber.length === 19) {
-        cardType = 'Discover';
-      }
-  // Maestro prefix of 5018, 5020, 5038, 6304 and a length of 12-19/
-  } else if (prefixLength4 === '5018' || prefixLength4 === '5020' || prefixLength4 === '5038' || prefixLength4 === '6304') {
-      if (cardNumber.length === 12 || cardNumber.length === 13 || cardNumber.length === 14 || cardNumber.length === 15 || cardNumber.length === 16 || cardNumber.length === 17 || cardNumber.length === 18 || cardNumber.length === 19) {
-        cardType = 'Maestro';
-      }
+  else if (prefixLength4 === '6011' || prefixLength3 === '644' || prefixLength3 === '645' || prefixLength3 === '646' || prefixLength3 === '647' || prefixLength3 === '648' || prefixLength3 === '649' || prefixLength2 === '65') {
+    if (cardNumber.length === 16 || cardNumber.length === 19) {
+      cardType = 'Discover';
+    }
+  }
+  // Maestro prefix of 5018, 5020, 5038, 6304 and a length of 12-19
+  else if (prefixLength4 === '5018' || prefixLength4 === '5020' || prefixLength4 === '5038' || prefixLength4 === '6304') {
+    if (cardNumber.length === 12 || cardNumber.length === 13 || cardNumber.length === 14 || cardNumber.length === 15 || cardNumber.length === 16 || cardNumber.length === 17 || cardNumber.length === 18 || cardNumber.length === 19) {
+      cardType = 'Maestro';
+    }
+  }
   // China UnionPay prefix of 622126-622925 and a length of 16-19.
   // China UnionPay prefix of 624-626 and a length of 16-19.
   // China UnionPay prefix of 6282-6288 and a length of 16-19.
-  } else if ((parseInt(prefixLength6) >= 622126 && parseInt(prefixLength6) <= 622925) || (parseInt(prefixLength3) >= 624 && parseInt(prefixLength3) <= 626) || (parseInt(prefixLength4) >= 6282 && parseInt(prefixLength4) <= 6288)) {
-      if (cardNumber.length === 16 || cardNumber.length === 17 || cardNumber.length === 18 || cardNumber.length === 19) {
-        cardType = 'China UnionPay';
-      }
+  else if ((parseInt(prefixLength6) >= 622126 && parseInt(prefixLength6) <= 622925) || (parseInt(prefixLength3) >= 624 && parseInt(prefixLength3) <= 626) || (parseInt(prefixLength4) >= 6282 && parseInt(prefixLength4) <= 6288)) {
+    if (cardNumber.length === 16 || cardNumber.length === 17 || cardNumber.length === 18 || cardNumber.length === 19) {
+      cardType = 'China UnionPay';
     }
-  // Switch always has a prefix of 4903, 4905, 4911, 4936, 564182, 633110, 6333, or 6759 and a length of 16, 18, or 19.
-  // Heads up! Switch and Visa seem to have some overlapping card numbers - in any apparent conflict, you should choose the network with the longer prefix.
-   else if (prefixLength4 === '4903' || prefixLength4 === '4905' || prefixLength4 === '4911' || prefixLength4 === '4936' || prefixLength6 === '564182' || prefixLength6 === '633110' || prefixLength4 === '6333' || prefixLength4 === '6759') {
-      if (cardNumber.length === 16 || cardNumber.length === 18 || cardNumber.length === 19) {
-        cardType = 'Switch';
-      }
   }
   return cardType;
 };

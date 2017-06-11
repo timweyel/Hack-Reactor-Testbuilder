@@ -216,29 +216,29 @@ describe('China UnionPay', function() {
     }
 
   // China UnionPay prefix of 624-626 and a length of 16-19.
-    for (var cardLength2 = 16; cardLength2 <= 19; cardLength2++) {
-      for (var prefix2 = 624; prefix2 <= 626; prefix2++) {
+  for (var cardLength2 = 16; cardLength2 <= 19; cardLength2++) {
+    for (var prefix2 = 624; prefix2 <= 626; prefix2++) {
 
-    (function(prefix2, cardLength2) {
-      it('has a prefix of ' + prefix2 + ' and a length of ' + cardLength2, function() {
-        detectNetwork(prefix2 + '1'.repeat(cardLength2 - 3)).should.equal('China UnionPay');
-        });
-      })(prefix2, cardLength2);
-      }
+  (function(prefix2, cardLength2) {
+    it('has a prefix of ' + prefix2 + ' and a length of ' + cardLength2, function() {
+      detectNetwork(prefix2 + '1'.repeat(cardLength2 - 3)).should.equal('China UnionPay');
+      });
+    })(prefix2, cardLength2);
     }
+  }
 
-  // China UnionPay prefix of 6282-6288 and a length of 16-19.
-    for (var cardLength3 = 16; cardLength3 <= 19; cardLength3++) {
-      for (var prefix3 = 6282; prefix3 <= 6288; prefix3++) {
+// China UnionPay prefix of 6282-6288 and a length of 16-19.
+  for (var cardLength3 = 16; cardLength3 <= 19; cardLength3++) {
+    for (var prefix3 = 6282; prefix3 <= 6288; prefix3++) {
 
-    (function(prefix3, cardLength3) {
-      it('has a prefix of ' + prefix3 + ' and a length of ' + cardLength3, function() {
-        detectNetwork(prefix3 + '1'.repeat(cardLength3 - 4)).should.equal('China UnionPay');
-        });
-      })(prefix3, cardLength3);
-      }
+  (function(prefix3, cardLength3) {
+    it('has a prefix of ' + prefix3 + ' and a length of ' + cardLength3, function() {
+      detectNetwork(prefix3 + '1'.repeat(cardLength3 - 4)).should.equal('China UnionPay');
+      });
+    })(prefix3, cardLength3);
     }
-  });
+  }
+});
 
 // Switch always has a prefix of 4903, 4905, 4911, 4936, 564182, 633110, 6333, or 6759 and a length of 16, 18, or 19.
 // Heads up! Switch and Visa seem to have some overlapping card numbers - in any apparent conflict, you should choose the network with the longer prefix.
